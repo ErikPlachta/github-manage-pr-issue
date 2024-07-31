@@ -1,0 +1,33 @@
+name: "Manage PR and Issues"
+description: "Custom action to manage PRs and Issues with dynamic inputs"
+author: "Erik PlachtA"
+
+inputs:
+  actor:
+    description: "The GitHub actor to check for"
+    required: true
+  branches:
+    description: "Comma-separated list of branches to check"
+    required: true
+  event_types:
+    description: "Comma-separated list of event types to check"
+    required: true
+  title_prefix:
+    description: "Prefix to add to PR/Issue titles"
+    required: false
+    default: ""
+  labels:
+    description: "Comma-separated list of labels to add"
+    required: false
+    default: ""
+  GITHUB_TOKEN:
+    description: "GitHub token to authenticate with the GitHub API"
+    required: true
+
+runs:
+  using: "node16"
+  main: "index.js"
+
+permissions:
+  pull-requests: write
+  issues: write

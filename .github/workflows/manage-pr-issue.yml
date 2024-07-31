@@ -1,0 +1,28 @@
+name: Manage PRs and Issues
+
+on:
+  pull_request:
+    types: [opened, edited]
+    branches:
+      - '*'
+  issues:
+    types: [opened, edited]
+
+jobs:
+  manage-general-prs-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run custom action for general PRs and issues
+        uses: ./.github/actions/manage-pr-issue
+        with:
+          actor: "all"  # Use a wildcard or manage actor differently in the custom action
+          branches: "main,develop"
+          event_types: "pull_request,issues"
+          title_prefix: ""
+          labels: "general"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
