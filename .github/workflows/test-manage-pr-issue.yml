@@ -1,0 +1,27 @@
+name: Test Manage Pull Request and Issue Action
+
+on:
+  workflow_dispatch: # Allows the workflow to be triggered manually
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Run action with test inputs
+        uses: ./.github/actions/manage-pullrequest-issue
+        with:
+          actor: "dependabot[bot]"
+          branches: "main,develop"
+          event_types: "pull_request,issues"
+          title_prefix: "test-prefix: "
+          labels: "test-label1,test-label2"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
