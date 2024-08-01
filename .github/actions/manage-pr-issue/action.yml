@@ -1,6 +1,6 @@
 name: "Manage PR and Issues"
 description: "Custom action to manage PRs and Issues with dynamic inputs"
-author: "Erik PlachtA"
+author: "Erik Plachta"
 
 inputs:
   actor:
@@ -29,5 +29,5 @@ runs:
   main: "index.js"
 
 permissions:
-  pull-requests: write
   issues: write
+  pull-requests: write
