@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const { execSync } = require('child_process');
 
 function isSemanticTitle(title) {
   const semanticTitlePattern = /^(feat|fix|chore|docs|style|refactor|test|perf)(\(\w+\))?: .+$/;
@@ -8,11 +9,18 @@ function isSemanticTitle(title) {
 
 async function run() {
   try {
+    // Install dependencies at runtime
+    execSync('npm install @actions/core @actions/github');
+
+    const core = require('@actions/core');
+    const github = require('@actions/github');
+
     const actor = core.getInput('actor');
     const branches = core.getInput('branches').split(',');
     const eventTypes = core.getInput('event_types').split(',');
     const titlePrefix = core.getInput('title_prefix') || '';
     const labels = core.getInput('labels') ? core.getInput('labels').split(',') : [];
+    const githubToken = core.getInput('GITHUB_TOKEN');
 
     const context = github.context;
     const eventName = context.eventName;
@@ -33,7 +41,7 @@ async function run() {
       return;
     }
 
-    const octokit = github.getOctokit(core.getInput('GITHUB_TOKEN'));
+    const octokit = github.getOctokit(githubToken);
 
     if (context.payload.pull_request) {
       const pullRequest = context.payload.pull_request;
