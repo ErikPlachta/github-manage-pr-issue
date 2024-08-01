@@ -21,11 +21,15 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Change to action directory and install dependencies
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm install
 
       - name: Build the project
-        run: npm run build
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm run build
 
       - name: Run custom action for general PRs and issues
         uses: ./.github/actions/manage-pullrequest-issue
