@@ -21,6 +21,10 @@ async function run() {
     const labels = core.getInput('labels') ? core.getInput('labels').split(',') : [];
     const githubToken = core.getInput('GITHUB_TOKEN');
 
+    if (!githubToken) {
+      throw new Error('GITHUB_TOKEN is required');
+    }
+
     const context = github.context;
     const eventName = context.eventName;
     const branchName = context.payload.pull_request ? context.payload.pull_request.base.ref : context.payload.issue ? context.payload.issue.base.ref : '';
