@@ -16,6 +16,12 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
       - name: Run action with test inputs
         uses: ./.github/actions/manage-pullrequest-issue
         with:
