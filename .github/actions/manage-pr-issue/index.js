@@ -1,6 +1,11 @@
+const { execSync } = require('child_process');
+
+// Install dependencies at runtime
+execSync('npm install @actions/core @actions/github', { stdio: 'inherit' });
+
+// Require modules after installation
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { execSync } = require('child_process');
 
 function isSemanticTitle(title) {
   const semanticTitlePattern = /^(feat|fix|chore|docs|style|refactor|test|perf)(\(\w+\))?: .+$/;
@@ -9,18 +14,16 @@ function isSemanticTitle(title) {
 
 async function run() {
   try {
-    // Install dependencies at runtime
-    execSync('npm install @actions/core @actions/github');
-
-    const core = require('@actions/core');
-    const github = require('@actions/github');
-
     const actor = core.getInput('actor');
     const branches = core.getInput('branches').split(',');
     const eventTypes = core.getInput('event_types').split(',');
     const titlePrefix = core.getInput('title_prefix') || '';
     const labels = core.getInput('labels') ? core.getInput('labels').split(',') : [];
     const githubToken = core.getInput('GITHUB_TOKEN');
+
+    if (!githubToken) {
+      throw new Error('GITHUB_TOKEN is required');
+    }
 
     const context = github.context;
     const eventName = context.eventName;
