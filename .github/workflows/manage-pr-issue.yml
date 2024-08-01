@@ -24,4 +24,4 @@ jobs:
           event_types: "pull_request,issues"
           title_prefix: ""
           labels: "general"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's default token
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

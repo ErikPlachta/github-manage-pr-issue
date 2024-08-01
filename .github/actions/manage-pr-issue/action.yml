@@ -21,7 +21,7 @@ inputs:
     required: false
     default: ""
   GITHUB_TOKEN:
-    description: "GitHub token to authenticate with the GitHub API"
+    description: "GitHub token to authenticate with the GitHub API. This requires the following steps. 1. Generate a PAT: Go to GitHub Settings. Click on 'Generate new token'. Select the scopes: repo (this gives full control of private repositories). 2.	Add the PAT as a Secret: Go to your GitHub repository. Navigate to Settings > Secrets > Actions. Add a new secret with the name PERSONAL_ACCESS_TOKEN and the value as your generated PAT."
     required: true
 
 runs:
