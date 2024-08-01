@@ -10,8 +10,6 @@ jobs:
   manage-dependabot-prs:
     runs-on: ubuntu-latest
 
-    if: github.actor == 'dependabot[bot]'
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,4 +22,4 @@ jobs:
           event_types: "pull_request"
           title_prefix: "chore(deps): "
           labels: "dependencies,automated"
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's default token
