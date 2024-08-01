@@ -19,7 +19,7 @@ The custom action is defined in `.github/actions/manage-pr`. It checks if PRs an
 
 #### Example `action.yml`
 
-\```yaml
+```yaml
 name: “Manage PR and Issues”
 description: “Custom action to manage PRs and Issues with dynamic inputs”
 author: “YOUR_NAME”
@@ -53,7 +53,7 @@ runs:
 permissions:
   pull-requests: write
   issues: write
-\```
+```
 
 ### Workflows
 
@@ -63,7 +63,7 @@ This workflow manages PRs created by Dependabot. It prefixes the titles and adds
 
 Save the following configuration as `.github/workflows/dependabot-prs.yml`:
 
-\```yaml
+```yaml
 name: Manage Dependabot PRs
 
 on:
@@ -91,7 +91,7 @@ jobs:
           title_prefix: “chore(deps): “
           labels: “dependencies,automated”
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-\```
+```
 
 #### Workflow for General PRs and Issues
 
@@ -99,7 +99,7 @@ This workflow manages all other PRs and issues. It ensures semantic titles, adds
 
 Save the following configuration as `.github/workflows/general-prs-issues.yml`:
 
-\```yaml
+```yaml
 name: Manage General PRs and Issues
 
 on:
@@ -127,11 +127,11 @@ jobs:
           title_prefix: “”
           labels: “general”
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-\```
+```
 
 ### Example Repository Structure
 
-\```
+```
 .github/
   actions/
     manage-pr/
@@ -142,7 +142,7 @@ jobs:
     dependabot-prs.yml
     general-prs-issues.yml
 README.md
-\```
+```
 
 ### Semantic Title Pattern
 
