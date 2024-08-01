@@ -1,6 +1,6 @@
 name: "Manage PR and Issues"
 description: "Custom action to manage PRs and Issues with dynamic inputs"
-author: "Erik Plachta"
+author: "Erik PlachtA"
 
 inputs:
   actor:
@@ -21,12 +21,12 @@ inputs:
     required: false
     default: ""
   GITHUB_TOKEN:
-    description: "GitHub token to authenticate with the GitHub API. This requires the following steps. 1. Generate a PAT: Go to GitHub Settings. Click on 'Generate new token'. Select the scopes: repo (this gives full control of private repositories). 2.	Add the PAT as a Secret: Go to your GitHub repository. Navigate to Settings > Secrets > Actions. Add a new secret with the name PERSONAL_ACCESS_TOKEN and the value as your generated PAT."
+    description: "GitHub token to authenticate with the GitHub API"
     required: true
 
 runs:
   using: "node16"
-  main: "index.js"
+  main: "dist/index.js"
 
 permissions:
   issues: write
