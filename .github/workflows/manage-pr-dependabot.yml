@@ -24,5 +24,4 @@ jobs:
           event_types: "pull_request"
           title_prefix: "chore(deps): "
           labels: "dependencies,automated"
-        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

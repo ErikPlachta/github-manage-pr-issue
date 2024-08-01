@@ -1,4 +1,4 @@
-name: Manage PRs and Issues
+name: Manage General PRs and Issues
 
 on:
   pull_request:
@@ -24,5 +24,4 @@ jobs:
           event_types: "pull_request,issues"
           title_prefix: ""
           labels: "general"
-        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
