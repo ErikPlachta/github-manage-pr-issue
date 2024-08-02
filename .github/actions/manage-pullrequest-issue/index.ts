@@ -15,6 +15,7 @@ async function run(): Promise<void> {
     const branches: string[] = core.getInput('branches').split(',');
     const eventTypes: string[] = core.getInput('event_types').split(',');
     const titlePrefix: string = core.getInput('title_prefix') || '';
+    const dependabotPrefix: string = core.getInput('dependabot_prefix') || 'chore: '; // Default prefix for dependabot
     const labels: string[] = core.getInput('labels') ? core.getInput('labels').split(',') : [];
     const githubToken: string = core.getInput('GITHUB_TOKEN');
 
@@ -44,7 +45,7 @@ async function run(): Promise<void> {
     const octokit = github.getOctokit(githubToken);
 
     if (context.payload.pull_request) {
-      await handlePullRequest(octokit, context, titlePrefix, labels);
+      await handlePullRequest(octokit, context, titlePrefix, labels, dependabotPrefix);
     } else if (context.payload.issue) {
       await handleIssue(octokit, context, titlePrefix, labels);
     }
