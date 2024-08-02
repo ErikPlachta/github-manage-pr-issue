@@ -1,6 +1,6 @@
 name: "Manage PR and Issues"
 description: "Custom action to manage PRs and Issues with dynamic inputs"
-author: "Erik PlachtA"
+author: "Erik Plachta"
 
 inputs:
   actor:
@@ -16,6 +16,10 @@ inputs:
     description: "Prefix to add to PR/Issue titles"
     required: false
     default: ""
+  dependabot_prefix:
+    description: "Prefix to add to Dependabot PR titles"
+    required: false
+    default: "chore: "
   labels:
     description: "Comma-separated list of labels to add"
     required: false

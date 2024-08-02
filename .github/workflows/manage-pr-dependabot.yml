@@ -16,12 +16,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Change to action directory and install dependencies
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm install
+
+      - name: Build the project
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm run build
+
       - name: Run custom action for Dependabot
         uses: ./.github/actions/manage-pullrequest-issue
         with:
           actor: "dependabot[bot]"
           branches: "main,develop"
           event_types: "pull_request"
-          title_prefix: "chore(deps): "
+          title_prefix: ""
+          dependabot_prefix: "chore(deps): "
           labels: "dependencies,automated"
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

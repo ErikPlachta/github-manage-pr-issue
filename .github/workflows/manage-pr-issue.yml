@@ -16,6 +16,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Updated to Node.js 18
+
+      - name: Change to action directory and install dependencies
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm install
+
+      - name: Build the project
+        run: |
+          cd .github/actions/manage-pullrequest-issue
+          npm run build
+
       - name: Run custom action for general PRs and issues
         uses: ./.github/actions/manage-pullrequest-issue
         with:
@@ -24,4 +39,4 @@ jobs:
           event_types: "pull_request,issues"
           title_prefix: ""
           labels: "general"
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Use PAT for testing purposes
